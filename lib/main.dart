@@ -1,83 +1,69 @@
+import 'dart:async';
+
 import "package:flutter/material.dart";
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      title: "Material App",
+      home: HomePage(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
-  String myvar;
-  String displaytext = "default";
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-  void showText() {
-    setState(() {
-      displaytext = myvar;
-    });
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    void finished() {
+      debugPrint("Finished ....");
+    }
+
+    debugPrint("Stated the splash screen");
+    Timer(Duration(seconds: 5), finished);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('GeeksforGeeks'),
-        ),
+    return Scaffold(
+        backgroundColor: Colors.red,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextField(
-                onChanged: (text) {
-                  myvar = text;
-                },
-                // decoration: InputDecoration(
-                //     fillColor: Colors.black,
-                //     border: OutlineInputBorder(),
-                //     labelText: "Username",
-                //     hintText: "Please enter your username",
-                //     helperText: "e.g : Shubham ",
-                //     helperStyle: TextStyle(
-                //       color: Colors.red[500],
-                //       fontWeight: FontWeight.bold,
-                //       fontSize: 15.0,
-                //     )),
-                // decoration: InputDecoration.collapsed(hintText: "Username"),
-
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.account_box),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                // CircularProgressIndicator(
+                //   strokeWidth: 10.0,
+                //   backgroundColor: Colors.white,
+                // )
+                Text(
+                  "Splash\nScreen",
+                  style: TextStyle(
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white70,
+                    fontFamily: "Cursive",
+                  ),
                 ),
-                autocorrect: true,
-                maxLength: 20,
-                style: TextStyle(
-                  // backgroundColor: Colors.blue,
-                  color: Colors.red,
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: showText,
-              child: Text("Press"),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "$displaytext",
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple[800],
-                ),
-              ),
-            ),
+              ],
+            )
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
